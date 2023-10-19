@@ -59,19 +59,20 @@ function collapseWhitespace(string) {
             <div><RouterLink :to="{ name: 'about' }">About</RouterLink></div>
           </li>
           <li>
-            <div><RouterLink :to="{ name: 'add' }">Add book</RouterLink></div>
+            <div><RouterLink :to="{ name: 'add' }" v-if="authenticationService.user.value && authenticationService.user.value.role === 'librarian'">Add book</RouterLink></div>
           </li>
           <li>
-            <div><RouterLink :to="{ name: 'signup' }">Sign up</RouterLink></div>
+            <div><RouterLink :to="{ name: 'signup' }" v-if="!authenticationService.user.value">Sign up</RouterLink></div>
           </li>
           <li>
-            <div><RouterLink :to="{ name: 'login' }">Log in</RouterLink></div>
+            <div><RouterLink :to="{ name: 'login' }" v-if="!authenticationService.user.value">Log in</RouterLink></div>
           </li>
           <li>
-            <div><a @click="authenticationService.logOut">Log out</a></div>
+            <div><a @click="authenticationService.logOut" v-if="authenticationService.user.value">Log out</a></div>
           </li>
         </ul>
       </nav>
+
       <input
         v-model="searchText"
         @input="updateHomeRouteQuery"

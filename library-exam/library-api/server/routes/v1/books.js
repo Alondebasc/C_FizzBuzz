@@ -35,7 +35,11 @@ router.get('/books', async (req, res, next) => {
 // POST request handler for /books endpoint (authenticated + authorized)
 router.post('/books', async (req, res, next) => {
   try {
-    // TODO
+    const title = req.body.title
+    const author = req.body.author
+    const year = req.body.year
+    const pageCount = req.body.pageCount
+    const description = req.body.description
     res.status(404).json({ error: { message: 'Route not implemented.' } })
   } catch (err) {
     // Catch any internal server error

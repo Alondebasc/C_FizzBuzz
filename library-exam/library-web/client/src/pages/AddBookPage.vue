@@ -9,10 +9,24 @@ const authenticationService = useAuthenticationService()
 
 const errorMessage = ref('')
 
-
 async function addBook(title, author, year, pageCount, description) {
-  // TODO
+  try {
+    await authenticationService.addBook(title, author, year, pageCount, description)
+    router.push({ name: 'Home' })
+  } catch (error) {
+    errorMessage.value = error.message
+  }
+
 }
+
+const user = computed(() => authenticationService.user.value)
+watch(user, (user) => {
+  if (user && user.role !== 'librarian') {
+    router.push({ name: 'Home' })
+  }
+})
+
+
 </script>
 
 <template>

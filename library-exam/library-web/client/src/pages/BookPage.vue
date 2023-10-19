@@ -91,6 +91,14 @@ function clearMessages() {
 function canEditBook() {
   return book.value && !bookIsDeleted.value
 }
+
+const user = computed(() => authenticationService.user.value)
+watch(user, (user) => {
+  if (user && user.role !== 'librarian') {
+    router.push({ name: 'home' })
+  }
+})
+
 </script>
 
 <template>
