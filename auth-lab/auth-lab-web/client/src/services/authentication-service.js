@@ -5,8 +5,6 @@ import validator from '../validators/authentication-validator.js'
 
 const authenticatedUser = ref(null)
 const readonlyAuthenticatedUser = readonly(authenticatedUser)
-const userIsAuthenticated = computed(() => authenticatedUser.value !== null)
-const userHasRole = (user, role) => user !== null && user.role === role
 
 initializeUser()
 router.beforeEach(updateUser)
@@ -96,7 +94,6 @@ function handleError(error) {
 export default function useAuthenticationService() {
   return {
     user: readonlyAuthenticatedUser,
-    userIsAuthenticated,
     signUp,
     logIn,
     logOut
